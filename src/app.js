@@ -21,4 +21,11 @@ app.use(express.static('public'));//this will serve the static files from the pu
 app.use(cookieParser());//this will parse the cookies and make it available in req.cookies
 
 
-export default {app};
+//importing the routes
+import router from './routes/user.routes.js';
+
+//using the routes
+app.use('/api/v1/users',router);//all the /users related routes will be handled by the userRouter
+//http://localhost:8000/api/v1/users and rest will be added from the user.routes.js file
+
+export default app;

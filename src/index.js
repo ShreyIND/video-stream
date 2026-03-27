@@ -1,10 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './db/index.js';//just using ./db or ./db/index sometime works but to be safe we will use ./db/index.js
-
+import app from './app.js';
 
 dotenv.config();
-const app=express();
+// const app=express();
 
 connectDB().then(()=>{
     app.on('error',(err)=>{

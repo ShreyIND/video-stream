@@ -72,8 +72,8 @@ userSchema.methods.passwordMatch=async function(password){
     }
 }
 
-userSchema.methods.generateJwtToken=async function(){
-    return await jwt.sign({
+userSchema.methods.generateJwtToken= function(){
+    return  jwt.sign({
         id:this._id,
         name:this.fullName,
         userName:this.userName,
@@ -92,8 +92,8 @@ userSchema.methods.generateJwtToken=async function(){
 // if we want to change the implementation of jwt.sign to an asynchronous function
 
 
-userSchema.methods.generateRefreshToken=async function(){
-    return await jwt.sign({
+userSchema.methods.generateRefreshToken=function(){
+    return  jwt.sign({
         id:this._id
     }
     ,process.env.REFRESH_TOKEN_SECRET
