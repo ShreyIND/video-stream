@@ -18,6 +18,7 @@ const uploadCloudinary=async (filePath)=>{
             folder:'video-sharing-app'
         });
         console.log("Cloudinary upload result",result);
+        fs.unlinkSync(filePath); 
         return result;
     }
     catch(error){
@@ -26,3 +27,5 @@ const uploadCloudinary=async (filePath)=>{
     }
 }
 
+
+export  {uploadCloudinary};

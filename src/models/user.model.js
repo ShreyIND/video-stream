@@ -6,11 +6,6 @@ dotenv.config();//you can also use in package.json "start": "dotenv -e .env node
 // and then you don't need to use dotenv.config() in every file
 
 const userSchema=new mongoose.Schema({
-    id:{
-        'type':String,
-        'required':true,
-        'unique':true
-    },
     watchHistory:[{
         'type':mongoose.Schema.Types.ObjectId,
         'ref':'Video'
@@ -37,30 +32,28 @@ const userSchema=new mongoose.Schema({
         'type':String,
         'required':true,  
     },
-    avatarUrl:{
+    avatar:{
         'type':String,
         'required':false
     },
-    coverImageUrl:{
+    coverImage:{
         'type':String,
         'required':false
     },
     refreshToken:{
-        'type':String,
-        'required':true
+        'type':String
     }
 },{
     timestamps:true
 })
 
 
-userSchema.pre('save',async function(next){
+userSchema.pre('save',async function(){
     if(!this.isModified('password')){
-        return next();
+        return null;
     }
     const salt=await bcrypt.genSalt(10);
     this.password=await bcrypt.hash(this.password,salt);
-    next();
 })
 
 userSchema.methods.passwordMatch=async function(password){
